@@ -1,0 +1,19 @@
+This kernel module implements a pseudo persistent memory (pseudo-PRAM), 
+which can be used with NVM-logging implemented in PostgreSQL. 
+It is 'pseudo' PRAM as it stores data in a DRAM area allocated at the module 
+insertion. The contents in the pseudo-PRAM does not survive power failure 
+but survives any failure occurred at application programs including PostgreSQL.
+
+Usage: insmod ppram.ko [num=N] [type=0 or 1]
+where N is the number of 16 Megabyte-sized WAL segments, and type specifies 
+the cache mode (0:write-combined, 1:uncached) for the segments.
+A device file (/dev/pseudo-pram) that supports read() and mmap() will be 
+created as a result of the module insertion.
+
+Note: To permit the access to the device file for PostgreSQL users, 
+the device file permission have to be changed. If you use RHEL7 (or CenOS7), 
+the most convenient way is probably creating the rule file named 
+/etc/udev/rules.d/99-ppram that contains the following line at first, 
+and then execute the insmod command.
+
+KERNEL=="pseudo-pram", SUBSYSTEM=="chardev", ACTION=="add", MODE="0666"

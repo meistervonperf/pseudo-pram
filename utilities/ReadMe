@@ -1,0 +1,13 @@
+These are utility programs for pseudo PRAM, consisting of ppramRead ppramClear.
+
+"ppramRead" shows the data in the device file (/dev/pseudo-pram) 
+in a human-readable text-format. This command takes no option parameter.
+
+"ppramClear" zero-clears the pseudo PRAM, which may be necessary in some ill 
+situation; for example, the $PGDATA directory is repeatedly restored from 
+the same tar file, which makes to a situation where the same system identifier, 
+indicating when the $PGDATA was created by initdb command, of the database is 
+used without the continuity of the LSN (Log Sequence Number). 
+This command takes one option parameter to specify the size of the pseudo PRAM 
+in the unit of WAL segments. The default value is 4 which corresponds that 
+the pseudo PRAM size is 64 Megabytes.
