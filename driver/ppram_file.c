@@ -12,6 +12,7 @@
 #include <linux/kernel.h>    /* printk() */
 #include <linux/errno.h>     /* error codes */
 #include <linux/module.h>  /* THIS_MODULE */
+#include <linux/vmalloc.h>  /* remap_vmalloc_range() */
 #include <linux/cdev.h>      /* char device stuff */
 #include <asm/uaccess.h>  /* copy_to_user() */
 #include <linux/device.h>  /* class_[create|destroy](), device_[create|destroy]() */
